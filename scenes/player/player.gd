@@ -7,7 +7,7 @@ extends CharacterBody2D
 
 @export var speed := 200
 @export var dash_multiplier := 2.5
-@export var attack_multiplier := 0.6
+@export var attack_multiplier := 0.3
 
 var direction: Vector2 = Vector2.ZERO #For move direction
 var last_direction: Vector2 = Vector2(1, 1) #Mostly for animation's direction
