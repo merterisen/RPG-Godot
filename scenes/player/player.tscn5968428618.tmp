@@ -1,4 +1,4 @@
-[gd_scene load_steps=400 format=3 uid="uid://cfx0etyi0ynox"]
+[gd_scene load_steps=395 format=3 uid="uid://cfx0etyi0ynox"]
 
 [ext_resource type="Script" uid="uid://dfsmklc82bpnb" path="res://scenes/player/player.gd" id="1_p47bc"]
 [ext_resource type="Texture2D" uid="uid://dgito1alchi44" path="res://assets/player/attack1/attack1run/attack1runLD.png" id="2_6cv16"]
@@ -3002,30 +3002,7 @@ _data = {
 &"runRU": SubResource("Animation_5ecds")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5q8fn"]
-animation = &"attack1standRD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wva7c"]
-animation = &"attack1standRU"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7obkq"]
-animation = &"attack1standLD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vo27k"]
-animation = &"attack1standLU"
-
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_j4nxn"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_5q8fn")
-blend_point_0/pos = Vector2(1, 1.1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_wva7c")
-blend_point_1/pos = Vector2(1, -1.1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_7obkq")
-blend_point_2/pos = Vector2(-1, 1.1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_vo27k")
-blend_point_3/pos = Vector2(-1, -1.1)
-min_space = Vector2(-1, -1.1)
-max_space = Vector2(1, 1.1)
-blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4hvnv"]
 animation = &"dashRU"
@@ -3117,6 +3094,11 @@ advance_condition = &"idle"
 advance_mode = 2
 advance_condition = &"attack1"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4hvnv"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"idle"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bbmj2"]
 advance_mode = 2
 advance_condition = &"attack1"
@@ -3126,16 +3108,6 @@ advance_mode = 2
 advance_condition = &"dash"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kxw46"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"run"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6cv16"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j4nxn"]
 switch_mode = 2
 advance_mode = 2
 advance_condition = &"run"
@@ -3151,7 +3123,7 @@ states/idle/node = SubResource("AnimationNodeBlendSpace2D_6cv16")
 states/idle/position = Vector2(429, 166)
 states/run/node = SubResource("AnimationNodeBlendSpace2D_28m0y")
 states/run/position = Vector2(668, 166)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_uniwh"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_iqsei"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_pk8ii"), "idle", "attack1", SubResource("AnimationNodeStateMachineTransition_5mf0n"), "run", "attack1", SubResource("AnimationNodeStateMachineTransition_bbmj2"), "run", "dash", SubResource("AnimationNodeStateMachineTransition_tffgl"), "dash", "run", SubResource("AnimationNodeStateMachineTransition_kxw46"), "attack1", "idle", SubResource("AnimationNodeStateMachineTransition_6cv16"), "attack1", "run", SubResource("AnimationNodeStateMachineTransition_j4nxn")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_uniwh"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_iqsei"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_pk8ii"), "idle", "attack1", SubResource("AnimationNodeStateMachineTransition_5mf0n"), "attack1", "idle", SubResource("AnimationNodeStateMachineTransition_4hvnv"), "run", "attack1", SubResource("AnimationNodeStateMachineTransition_bbmj2"), "run", "dash", SubResource("AnimationNodeStateMachineTransition_tffgl"), "dash", "run", SubResource("AnimationNodeStateMachineTransition_kxw46")]
 
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
@@ -3177,10 +3149,10 @@ parameters/conditions/attack1 = false
 parameters/conditions/dash = false
 parameters/conditions/idle = false
 parameters/conditions/run = false
-parameters/attack1/blend_position = Vector2(0.0147784, 0.0634615)
+parameters/attack1/blend_position = Vector2(0, 0)
 parameters/dash/blend_position = Vector2(0, 0)
-parameters/idle/blend_position = Vector2(0, 0)
-parameters/run/blend_position = Vector2(0, 0)
+parameters/idle/blend_position = Vector2(-0.998358, 1.09013)
+parameters/run/blend_position = Vector2(0.609195, -0.25157)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_0owmy")

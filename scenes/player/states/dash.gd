@@ -6,6 +6,7 @@ var dash_direction: Vector2
 #------------------------------------------------------------------------------#
 func enter_state(): #When Dash Starts
 	dash_direction = player.direction #Take the player's last direction before dash
+	animation_tree["parameters/conditions/dash"] = true
 	sprites.modulate = Color(1, 1, 1, 0.4) #Make Transparent
 	dash_timer.start() #Start Dash Timer
 
@@ -18,45 +19,16 @@ func update_state(_delta):
 
 func _on_dash_timer_timeout() -> void: #When Dash Timer Ends
 	sprites.modulate = Color(1, 1, 1, 1) #Make Untransparent
-	state_transition.emit(self, "Idle") #End dash (Return to Idle)
+	animation_tree["parameters/conditions/dash"] = false
+	state_transition.emit(self, "run") #Transition to run state
+
 
 func dash():
 	player.velocity = dash_direction * player.speed * player.dash_multiplier
 	player.move_and_slide()
-
+	
 func animate_dash():
-	if dash_direction.y > 0:
-		if dash_direction.x > 0:
-			animation_player.play("dashRD")
-		elif dash_direction.x < 0:
-			animation_player.play("dashLD")
-		elif dash_direction.x == 0:
-			pass
-			#if dash_direction.x > 0:
-			#	animation_player.play("dashRD")
-			#elif dash_direction.x < 0:
-			#	animation_player.play("dashLD")
-
-	elif dash_direction.y < 0:
-		if dash_direction.x > 0:
-			animation_player.play("dashRU") 
-		elif dash_direction.x < 0:
-			animation_player.play("dashLU") 
-		elif dash_direction.x == 0:
-			pass
-			#if dash_direction.x > 0:
-			#	animation_player.play("dashRU")
-			#elif dash_direction.x < 0:
-			#	animation_player.play("dashLU")
-		
-	elif dash_direction.y == 0:
-		if dash_direction.x > 0:
-			if player.last_direction.y > 0:
-				animation_player.play("dashRD")
-			elif player.last_direction.y < 0:
-				animation_player.play("dashRU")
-		elif dash_direction.x <0:
-			if player.last_direction.y > 0:
-				animation_player.play("dashLD")
-			elif player.last_direction.y < 0:
-				animation_player.play("dashLU")
+	if dash_direction.x == 0:
+		animation_tree["parameters/dash/blend_position"] = Vector2(player.last_direction.x, dash_direction.y)
+	else:
+		animation_tree["parameters/dash/blend_position"] = dash_direction

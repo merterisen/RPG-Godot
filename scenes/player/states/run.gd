@@ -2,57 +2,32 @@ class_name RunState extends State
 
 #------------------------------------------------------------------------------#
 func enter_state():
-	pass
+	animation_tree["parameters/conditions/run"] = true
 
 func update_state(_delta: float):
 	
-	if Input.is_action_pressed("attack"):
-		state_transition.emit(self, "Attack1")
-	
-	animate_run()
+	animate_run()	#Should be in update because when change direction without changing state,
+					#want to update animation
 	run()
 	
-	if player.direction == Vector2.ZERO: #Transition to idle state
-		state_transition.emit(self, "Idle")
+	if Input.is_action_just_pressed("attack"): #Transition to attack state
+		animation_tree["parameters/conditions/run"] = false
+		state_transition.emit(self, "attack1")
+		
 	
-	if Input.is_action_just_pressed("dash"):
-		state_transition.emit(self, "Dash")
+	if player.direction == Vector2.ZERO: #Transition to idle state
+		animation_tree["parameters/conditions/run"] = false
+		state_transition.emit(self, "idle")
+		
+	
+	if Input.is_action_just_pressed("dash"): #Transition to dash state
+		animation_tree["parameters/conditions/run"] = false
+		state_transition.emit(self, "dash")
+		
 #------------------------------------------------------------------------------#
 
 func animate_run():
-	if player.direction.y > 0:
-		if player.direction.x > 0:
-			animation_player.play("runRD")
-		elif player.direction.x < 0:
-			animation_player.play("runLD")
-		elif player.direction.x == 0:
-			if player.last_direction.x > 0:
-				animation_player.play("runRD")
-			elif player.last_direction.x < 0:
-				animation_player.play("runLD")
-
-	elif player.direction.y < 0:
-		if player.direction.x > 0:
-			animation_player.play("runRU") 
-		elif player.direction.x < 0:
-			animation_player.play("runLU") 
-		elif player.direction.x == 0:
-			if player.last_direction.x > 0:
-				animation_player.play("runRU")
-			elif player.last_direction.x < 0:
-				animation_player.play("runLU") 
-		
-	elif player.direction.y == 0:
-		if player.direction.x > 0:
-			if player.last_direction.y > 0:
-				animation_player.play("runRD")
-			elif player.last_direction.y < 0:
-				animation_player.play("runRU")
-		elif player.direction.x <0:
-			if player.last_direction.y > 0:
-				animation_player.play("runLD")
-			elif player.last_direction.y < 0:
-				animation_player.play("runLU")
+	animation_tree["parameters/run/blend_position"] = player.last_direction
 
 func run():
 	player.velocity = player.direction * player.speed
