@@ -8,7 +8,7 @@ class_name AttackState extends State
 #------------------------------------------------------------------------------#
 func enter_state(): #When attack1 starts
 	animation_tree["parameters/conditions/attack1"] = true
-	animate_attack() 
+	animate_attack()
 	attack_1_timer.start() #Start attack1 timer
 
 
@@ -43,6 +43,7 @@ func _on_attack_1_timer_timeout() -> void: #When attack 1 timer ends
 		animation_tree["parameters/conditions/attack2"] = true #Transition to attack2 animation
 		attack_in_queue = false
 		attack_2_timer.start()
+		animate_attack() 
 
 func _on_attack_2_timer_timeout() -> void: #When attack 2 timer ends
 	animation_tree["parameters/conditions/attack2"] = false
@@ -58,12 +59,20 @@ func _on_attack_2_timer_timeout() -> void: #When attack 2 timer ends
 		animation_tree["parameters/conditions/attack3"] = true #Transition to attack2 animation
 		attack_in_queue = false
 		attack_3_timer.start()
+		animate_attack() 
 
 func _on_attack_3_timer_timeout() -> void: #When attack 3 timer ends
 	animation_tree["parameters/conditions/attack3"] = false
 	
-	if player.direction == Vector2.ZERO:
-		state_transition.emit(self, "idle") #Transition to Idle state
+	if attack_in_queue == false:
+		if player.direction == Vector2.ZERO:
+			state_transition.emit(self, "idle") #Transition to Idle state
 		
-	elif player.direction != Vector2.ZERO:
-		state_transition.emit(self, "run") #Transition to Run state
+		elif player.direction != Vector2.ZERO:
+			state_transition.emit(self, "run") #Transition to Run state
+	
+	elif attack_in_queue == true:
+		animation_tree["parameters/conditions/attack1"] = true
+		attack_in_queue = false
+		attack_1_timer.start()
+		animate_attack() 
