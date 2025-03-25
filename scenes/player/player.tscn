@@ -1,4 +1,4 @@
-[gd_scene load_steps=417 format=3 uid="uid://cfx0etyi0ynox"]
+[gd_scene load_steps=418 format=3 uid="uid://cfx0etyi0ynox"]
 
 [ext_resource type="Script" uid="uid://dfsmklc82bpnb" path="res://scenes/player/player.gd" id="1_p47bc"]
 [ext_resource type="Texture2D" uid="uid://bfhxaogup6e18" path="res://assets/player/idle/idleLD.png" id="2_gx1jg"]
@@ -3355,6 +3355,10 @@ switch_mode = 2
 advance_mode = 2
 advance_condition = &"attack1"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cnsyf"]
+advance_mode = 2
+advance_condition = &"end"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_j4nxn"]
 states/End/position = Vector2(220, 250)
 states/Start/position = Vector2(220, 166)
@@ -3370,8 +3374,8 @@ states/idle/node = SubResource("AnimationNodeBlendSpace2D_6cv16")
 states/idle/position = Vector2(429, 166)
 states/run/node = SubResource("AnimationNodeBlendSpace2D_28m0y")
 states/run/position = Vector2(668, 166)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_uniwh"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_iqsei"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_pk8ii"), "idle", "attack1", SubResource("AnimationNodeStateMachineTransition_5mf0n"), "run", "attack1", SubResource("AnimationNodeStateMachineTransition_bbmj2"), "run", "dash", SubResource("AnimationNodeStateMachineTransition_tffgl"), "dash", "run", SubResource("AnimationNodeStateMachineTransition_kxw46"), "attack1", "idle", SubResource("AnimationNodeStateMachineTransition_6cv16"), "attack1", "run", SubResource("AnimationNodeStateMachineTransition_j4nxn"), "attack1", "attack2", SubResource("AnimationNodeStateMachineTransition_ioxgp"), "attack2", "attack3", SubResource("AnimationNodeStateMachineTransition_hyqqp"), "attack2", "run", SubResource("AnimationNodeStateMachineTransition_ds1xl"), "attack3", "run", SubResource("AnimationNodeStateMachineTransition_1u1sw"), "attack3", "idle", SubResource("AnimationNodeStateMachineTransition_2t3bg"), "attack2", "idle", SubResource("AnimationNodeStateMachineTransition_jrbya"), "attack3", "attack1", SubResource("AnimationNodeStateMachineTransition_yj68g")]
-graph_offset = Vector2(0, -216.862)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_uniwh"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_iqsei"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_pk8ii"), "idle", "attack1", SubResource("AnimationNodeStateMachineTransition_5mf0n"), "run", "attack1", SubResource("AnimationNodeStateMachineTransition_bbmj2"), "run", "dash", SubResource("AnimationNodeStateMachineTransition_tffgl"), "dash", "run", SubResource("AnimationNodeStateMachineTransition_kxw46"), "attack1", "idle", SubResource("AnimationNodeStateMachineTransition_6cv16"), "attack1", "run", SubResource("AnimationNodeStateMachineTransition_j4nxn"), "attack1", "attack2", SubResource("AnimationNodeStateMachineTransition_ioxgp"), "attack2", "attack3", SubResource("AnimationNodeStateMachineTransition_hyqqp"), "attack2", "run", SubResource("AnimationNodeStateMachineTransition_ds1xl"), "attack3", "run", SubResource("AnimationNodeStateMachineTransition_1u1sw"), "attack3", "idle", SubResource("AnimationNodeStateMachineTransition_2t3bg"), "attack2", "idle", SubResource("AnimationNodeStateMachineTransition_jrbya"), "attack3", "attack1", SubResource("AnimationNodeStateMachineTransition_yj68g"), "idle", "End", SubResource("AnimationNodeStateMachineTransition_cnsyf")]
+graph_offset = Vector2(0, 125.27)
 
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
@@ -3396,6 +3400,7 @@ parameters/conditions/attack1 = false
 parameters/conditions/attack2 = false
 parameters/conditions/attack3 = false
 parameters/conditions/dash = false
+parameters/conditions/end = false
 parameters/conditions/idle = false
 parameters/conditions/run = false
 parameters/attack1/blend_position = Vector2(0.0147784, 0.0634615)
