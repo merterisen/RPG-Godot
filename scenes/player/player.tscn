@@ -1,10 +1,10 @@
-[gd_scene load_steps=372 format=3 uid="uid://cfx0etyi0ynox"]
+[gd_scene load_steps=373 format=3 uid="uid://cfx0etyi0ynox"]
 
 [ext_resource type="Script" uid="uid://dfsmklc82bpnb" path="res://scenes/player/player.gd" id="1_p47bc"]
 [ext_resource type="Texture2D" uid="uid://bfhxaogup6e18" path="res://assets/player/idle/idleLD.png" id="2_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://cn1k024bmdght" path="res://assets/player/dash/dashLD.png" id="2_kvlxm"]
 [ext_resource type="Texture2D" uid="uid://yodq161j12cb" path="res://assets/player/attack/attackstand/attackfullLD.png" id="2_yj68g"]
-[ext_resource type="Script" uid="uid://b7p5u4dve3sx" path="res://scenes/player/state_machine.gd" id="3_0owmy"]
+[ext_resource type="Script" uid="uid://b7p5u4dve3sx" path="res://scenes/statemachine.gd" id="3_0owmy"]
 [ext_resource type="Texture2D" uid="uid://7r37xf5ktch6" path="res://assets/player/attack/attackstand/attackfullLU.png" id="3_ioxgp"]
 [ext_resource type="Texture2D" uid="uid://daxo8vdnus6uj" path="res://assets/player/dash/dashLU.png" id="3_uf5tr"]
 [ext_resource type="Texture2D" uid="uid://b41asg8nitaqx" path="res://assets/player/idle/idleLU.png" id="3_ugbui"]
@@ -2390,6 +2390,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ioxgp"]
 radius = 9.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ioxgp"]
+size = Vector2(21, 44)
+
 [sub_resource type="Animation" id="Animation_vcxk4"]
 length = 0.001
 tracks/0/type = "value"
@@ -3148,7 +3151,6 @@ script = ExtResource("1_p47bc")
 dash_multiplier = 2.0
 
 [node name="rootsprite" type="Sprite2D" parent="."]
-y_sort_enabled = true
 
 [node name="sprites" type="AnimatedSprite2D" parent="rootsprite"]
 position = Vector2(0, 15)
@@ -3158,6 +3160,20 @@ animation = &"idleRD"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ioxgp")
+
+[node name="damagedealtarea" type="Node2D" parent="."]
+
+[node name="hitboxright" type="Area2D" parent="damagedealtarea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damagedealtarea/hitboxright"]
+position = Vector2(10.5, -9)
+shape = SubResource("RectangleShape2D_ioxgp")
+
+[node name="hitboxleft" type="Area2D" parent="damagedealtarea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damagedealtarea/hitboxleft"]
+position = Vector2(-11, -9)
+shape = SubResource("RectangleShape2D_ioxgp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -3178,12 +3194,13 @@ parameters/attack1/blend_position = Vector2(0.0147784, 0.0634615)
 parameters/attack2/blend_position = Vector2(0, 0)
 parameters/attack3/blend_position = Vector2(0, 0)
 parameters/dash/blend_position = Vector2(0, 0)
-parameters/idle/blend_position = Vector2(0, 0)
+parameters/idle/blend_position = Vector2(0.0197045, 0.205494)
 parameters/run/blend_position = Vector2(0, 0)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_0owmy")
 initial_state = NodePath("idle")
+metadata/_custom_type_script = "uid://b7p5u4dve3sx"
 
 [node name="idle" type="Node" parent="StateMachine"]
 script = ExtResource("4_qek5x")

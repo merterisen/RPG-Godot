@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3jo8t3e2uldk"]
+
+[ext_resource type="Script" uid="uid://cfa54j41xcpna" path="res://scenes/enemy/dummy/dummy.gd" id="1_v1s2w"]
+[ext_resource type="Texture2D" uid="uid://p31mi7fnj53u" path="res://assets/targetdummy/targetdummy.png" id="2_no016"]
+[ext_resource type="Script" uid="uid://b7p5u4dve3sx" path="res://scenes/statemachine.gd" id="3_bgyhj"]
+[ext_resource type="Script" uid="uid://dw016lb68c3st" path="res://scenes/enemy/dummy/states/dummyidle.gd" id="4_sjcwc"]
+[ext_resource type="Script" uid="uid://2gb11nguxxp3" path="res://scenes/enemy/dummy/states/dummytakedamage.gd" id="5_hp4hj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdajm"]
+size = Vector2(7, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6j5hp"]
+size = Vector2(22, 35)
+
+[node name="dummy" type="CharacterBody2D"]
+script = ExtResource("1_v1s2w")
+
+[node name="rootsprite" type="Sprite2D" parent="."]
+
+[node name="sprite" type="Sprite2D" parent="rootsprite"]
+position = Vector2(-2, -5)
+scale = Vector2(0.217073, 0.217073)
+texture = ExtResource("2_no016")
+
+[node name="colission" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -2)
+shape = SubResource("RectangleShape2D_gdajm")
+
+[node name="hurtbox" type="Area2D" parent="." groups=["enemy_hurtbox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(2, -9.5)
+shape = SubResource("RectangleShape2D_6j5hp")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_bgyhj")
+initial_state = NodePath("idle")
+metadata/_custom_type_script = "uid://b7p5u4dve3sx"
+
+[node name="idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_sjcwc")
+metadata/_custom_type_script = "uid://c48meu1nb6prq"
+
+[node name="takedamage" type="Node" parent="StateMachine"]
+script = ExtResource("5_hp4hj")
+metadata/_custom_type_script = "uid://c48meu1nb6prq"
+
+[node name="takedamagetimer" type="Timer" parent="StateMachine/takedamage"]
+wait_time = 0.25
+one_shot = true
+
+[node name="freezetimer" type="Timer" parent="StateMachine/takedamage"]
+wait_time = 0.15
+one_shot = true
+
+[connection signal="timeout" from="StateMachine/takedamage/takedamagetimer" to="StateMachine/takedamage" method="_on_takedamagetimer_timeout"]
+[connection signal="timeout" from="StateMachine/takedamage/freezetimer" to="StateMachine/takedamage" method="_on_freezetimer_timeout"]

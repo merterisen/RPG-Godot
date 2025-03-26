@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var state_machine: StateMachine = $StateMachine
 
-@export var speed := 200
+@export var speed := 150
 @export var dash_multiplier := 2.5
 @export var attack_multiplier := 0.3
 

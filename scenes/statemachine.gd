@@ -39,3 +39,25 @@ func change_state(source_state : State, new_state_name : String):
 		
 	new_state.enter_state()
 	current_state = new_state
+
+#Use force_change_state cautiously, it immediately switches to a state regardless of any transitions.
+#This is used to force us into a 'death state' when killed
+func force_change_state(new_state : String):
+	var newState = states.get(new_state.to_lower())
+	
+	if !newState:
+		print(new_state + " does not exist in the dictionary of states")
+		return
+	
+	if current_state == newState:
+		print("State is same, aborting")
+		return
+		
+	#NOTE Calling exit like so: (current_state.Exit()) may cause warnings when flushing queries, like when the enemy is being removed after death. 
+	#call_deferred is safe and prevents this from occuring. We get the Exit function from the state as a callable and then call it in a thread-safe manner
+	if current_state:
+		var exit_callable = Callable(current_state, "Exit")
+		exit_callable.call_deferred()
+	
+	newState.enter_state()
+	current_state = newState

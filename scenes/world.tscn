@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgs004r5wljvp"]
+[gd_scene load_steps=3 format=3 uid="uid://cgs004r5wljvp"]
 
 [ext_resource type="PackedScene" uid="uid://cfx0etyi0ynox" path="res://scenes/player/player.tscn" id="1_nnsk1"]
+[ext_resource type="PackedScene" uid="uid://b3jo8t3e2uldk" path="res://scenes/enemy/dummy/dummy.tscn" id="2_rwgxs"]
 
 [node name="world" type="Node2D"]
+y_sort_enabled = true
 
 [node name="character" parent="." instance=ExtResource("1_nnsk1")]
 position = Vector2(128, 192)
+
+[node name="Camera2D" type="Camera2D" parent="character"]
+position_smoothing_enabled = true
+
+[node name="targetdummy" parent="." instance=ExtResource("2_rwgxs")]
+position = Vector2(300, 192)

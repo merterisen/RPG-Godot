@@ -1,13 +1,6 @@
-## Virtual base class for all states.
+## Virtual base class for all player states.
 ## Extend this class and override its methods to implement a state.
 class_name State extends Node
-
-@onready var player: CharacterBody2D = $"../.."
-@onready var sprites: AnimatedSprite2D = $"../../rootsprite/sprites"
-@onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
-@onready var animation_tree: AnimationTree = $"../../AnimationTree"
-@onready var state_machine: StateMachine = $".."
-
 
 ## Emitted when the state finishes and wants to transition to another state.
 ## Example use: state_transition.emit(self, "Idle")

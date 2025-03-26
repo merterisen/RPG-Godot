@@ -1,5 +1,11 @@
 class_name DashState extends State
 
+@onready var player: CharacterBody2D = $"../.."
+@onready var sprites: AnimatedSprite2D = $"../../rootsprite/sprites"
+@onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
+@onready var animation_tree: AnimationTree = $"../../AnimationTree"
+@onready var state_machine: StateMachine = $".."
+
 var dash_direction: Vector2
 @onready var dash_timer: Timer = $DashTimer
 
