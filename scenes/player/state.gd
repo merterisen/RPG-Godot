@@ -3,7 +3,7 @@
 class_name State extends Node
 
 @onready var player: CharacterBody2D = $"../.."
-@onready var sprites: AnimatedSprite2D = $"../../sprites"
+@onready var sprites: AnimatedSprite2D = $"../../rootsprite/sprites"
 @onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
 @onready var animation_tree: AnimationTree = $"../../AnimationTree"
 @onready var state_machine: StateMachine = $".."

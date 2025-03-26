@@ -1,4 +1,4 @@
-[gd_scene load_steps=418 format=3 uid="uid://cfx0etyi0ynox"]
+[gd_scene load_steps=372 format=3 uid="uid://cfx0etyi0ynox"]
 
 [ext_resource type="Script" uid="uid://dfsmklc82bpnb" path="res://scenes/player/player.gd" id="1_p47bc"]
 [ext_resource type="Texture2D" uid="uid://bfhxaogup6e18" path="res://assets/player/idle/idleLD.png" id="2_gx1jg"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://dafextqt8ui6u" path="res://assets/player/run/runLD.png" id="11_ugbui"]
 [ext_resource type="Texture2D" uid="uid://btyblknieskhe" path="res://assets/player/run/runRD.png" id="12_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://bps58o6wnqg1u" path="res://assets/player/run/runRU.png" id="14_fcs02"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dj06ibo26847k" path="res://scenes/player/player.tres" id="18_ioxgp"]
 [ext_resource type="Script" uid="uid://qxkms14e7hkj" path="res://scenes/player/states/attack_1.gd" id="22_6cv16"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mje2k"]
@@ -2386,12 +2387,15 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ioxgp"]
+radius = 9.0
+
 [sub_resource type="Animation" id="Animation_vcxk4"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2403,7 +2407,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2420,7 +2424,7 @@ step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2432,7 +2436,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2449,7 +2453,7 @@ step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2461,7 +2465,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2478,7 +2482,7 @@ step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2490,7 +2494,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2507,7 +2511,7 @@ step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2519,7 +2523,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2536,7 +2540,7 @@ step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2548,7 +2552,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2565,7 +2569,7 @@ step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2577,7 +2581,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2594,7 +2598,7 @@ step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2606,7 +2610,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2623,7 +2627,7 @@ step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2635,7 +2639,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2652,7 +2656,7 @@ step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2664,7 +2668,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2681,7 +2685,7 @@ step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2693,7 +2697,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2710,7 +2714,7 @@ step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2722,7 +2726,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2739,7 +2743,7 @@ step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2751,7 +2755,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2768,7 +2772,7 @@ step = 0.0125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2780,7 +2784,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2797,7 +2801,7 @@ step = 0.0125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2809,7 +2813,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2826,7 +2830,7 @@ step = 0.0125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2838,7 +2842,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2855,7 +2859,7 @@ step = 0.0125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2867,7 +2871,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2884,7 +2888,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2896,7 +2900,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2913,7 +2917,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2925,7 +2929,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2942,7 +2946,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2954,7 +2958,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2971,7 +2975,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -2983,7 +2987,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -3000,7 +3004,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -3012,7 +3016,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -3029,7 +3033,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -3041,7 +3045,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -3058,7 +3062,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -3070,7 +3074,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -3087,7 +3091,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites:animation")
+tracks/0/path = NodePath("rootsprite/sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -3099,7 +3103,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprites:frame")
+tracks/1/path = NodePath("rootsprite/sprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -3138,255 +3142,22 @@ _data = {
 &"runRU": SubResource("Animation_5ecds")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5q8fn"]
-animation = &"attack1RD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wva7c"]
-animation = &"attack1RU"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7obkq"]
-animation = &"attack1LD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vo27k"]
-animation = &"attack1LU"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_j4nxn"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_5q8fn")
-blend_point_0/pos = Vector2(1, 1.1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_wva7c")
-blend_point_1/pos = Vector2(1, -1.1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_7obkq")
-blend_point_2/pos = Vector2(-1, 1.1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_vo27k")
-blend_point_3/pos = Vector2(-1, -1.1)
-min_space = Vector2(-1, -1.1)
-max_space = Vector2(1, 1.1)
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yj68g"]
-animation = &"attack2RD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ioxgp"]
-animation = &"attack2RU"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cnsyf"]
-animation = &"attack2LD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_007i1"]
-animation = &"attack2LU"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_yj68g"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_yj68g")
-blend_point_0/pos = Vector2(1, 1.1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_ioxgp")
-blend_point_1/pos = Vector2(1, -1.1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_cnsyf")
-blend_point_2/pos = Vector2(-1, 1.1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_007i1")
-blend_point_3/pos = Vector2(-1, -1.1)
-min_space = Vector2(-1, -1.1)
-max_space = Vector2(1, 1.1)
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_genst"]
-animation = &"attack3RU"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_niom3"]
-animation = &"attack3RD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ttakn"]
-animation = &"attack3LD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rw8a5"]
-animation = &"attack3LU"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_iwuka"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_genst")
-blend_point_0/pos = Vector2(1, -1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_niom3")
-blend_point_1/pos = Vector2(1, 1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_ttakn")
-blend_point_2/pos = Vector2(-1, 1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_rw8a5")
-blend_point_3/pos = Vector2(-1, -1)
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4hvnv"]
-animation = &"dashRU"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bbmj2"]
-animation = &"dashRD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kxw46"]
-animation = &"dashLD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8qxvo"]
-animation = &"dashLU"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_uniwh"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_4hvnv")
-blend_point_0/pos = Vector2(1, -1.1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_bbmj2")
-blend_point_1/pos = Vector2(1, 1.1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_kxw46")
-blend_point_2/pos = Vector2(-1, 1.1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_8qxvo")
-blend_point_3/pos = Vector2(-1, -1.1)
-min_space = Vector2(-1, -1.1)
-max_space = Vector2(1, 1.1)
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6cv16"]
-animation = &"idleRU"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j4nxn"]
-animation = &"idleRD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_28m0y"]
-animation = &"idleLD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uniwh"]
-animation = &"idleLU"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_6cv16"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_6cv16")
-blend_point_0/pos = Vector2(1, -1.1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_j4nxn")
-blend_point_1/pos = Vector2(1, 1.1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_28m0y")
-blend_point_2/pos = Vector2(-1, 1.1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_uniwh")
-blend_point_3/pos = Vector2(-1, -1.1)
-min_space = Vector2(-1, -1.1)
-max_space = Vector2(1, 1.1)
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iqsei"]
-animation = &"runRU"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tffgl"]
-animation = &"runRD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pk8ii"]
-animation = &"runLD"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5mf0n"]
-animation = &"runLU"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_28m0y"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_iqsei")
-blend_point_0/pos = Vector2(1, -1.1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_tffgl")
-blend_point_1/pos = Vector2(1, 1.1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_pk8ii")
-blend_point_2/pos = Vector2(-1, 1.1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_5mf0n")
-blend_point_3/pos = Vector2(-1, -1.1)
-min_space = Vector2(-1, -1.1)
-max_space = Vector2(1, 1.1)
-blend_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uniwh"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iqsei"]
-advance_mode = 2
-advance_condition = &"run"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pk8ii"]
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5mf0n"]
-advance_mode = 2
-advance_condition = &"attack1"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bbmj2"]
-advance_mode = 2
-advance_condition = &"attack1"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tffgl"]
-advance_mode = 2
-advance_condition = &"dash"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kxw46"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"run"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6cv16"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j4nxn"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"run"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ioxgp"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"attack2"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hyqqp"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"attack3"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ds1xl"]
-advance_mode = 2
-advance_condition = &"run"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1u1sw"]
-advance_mode = 2
-advance_condition = &"run"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2t3bg"]
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jrbya"]
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj68g"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"attack1"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cnsyf"]
-advance_mode = 2
-advance_condition = &"end"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_j4nxn"]
-states/End/position = Vector2(220, 250)
-states/Start/position = Vector2(220, 166)
-states/attack1/node = SubResource("AnimationNodeBlendSpace2D_j4nxn")
-states/attack1/position = Vector2(543, 44)
-states/attack2/node = SubResource("AnimationNodeBlendSpace2D_yj68g")
-states/attack2/position = Vector2(605, -103)
-states/attack3/node = SubResource("AnimationNodeBlendSpace2D_iwuka")
-states/attack3/position = Vector2(472, -165.29)
-states/dash/node = SubResource("AnimationNodeBlendSpace2D_uniwh")
-states/dash/position = Vector2(824, 166)
-states/idle/node = SubResource("AnimationNodeBlendSpace2D_6cv16")
-states/idle/position = Vector2(429, 166)
-states/run/node = SubResource("AnimationNodeBlendSpace2D_28m0y")
-states/run/position = Vector2(668, 166)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_uniwh"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_iqsei"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_pk8ii"), "idle", "attack1", SubResource("AnimationNodeStateMachineTransition_5mf0n"), "run", "attack1", SubResource("AnimationNodeStateMachineTransition_bbmj2"), "run", "dash", SubResource("AnimationNodeStateMachineTransition_tffgl"), "dash", "run", SubResource("AnimationNodeStateMachineTransition_kxw46"), "attack1", "idle", SubResource("AnimationNodeStateMachineTransition_6cv16"), "attack1", "run", SubResource("AnimationNodeStateMachineTransition_j4nxn"), "attack1", "attack2", SubResource("AnimationNodeStateMachineTransition_ioxgp"), "attack2", "attack3", SubResource("AnimationNodeStateMachineTransition_hyqqp"), "attack2", "run", SubResource("AnimationNodeStateMachineTransition_ds1xl"), "attack3", "run", SubResource("AnimationNodeStateMachineTransition_1u1sw"), "attack3", "idle", SubResource("AnimationNodeStateMachineTransition_2t3bg"), "attack2", "idle", SubResource("AnimationNodeStateMachineTransition_jrbya"), "attack3", "attack1", SubResource("AnimationNodeStateMachineTransition_yj68g"), "idle", "End", SubResource("AnimationNodeStateMachineTransition_cnsyf")]
-graph_offset = Vector2(0, 125.27)
-
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_p47bc")
 dash_multiplier = 2.0
 
-[node name="sprites" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 23)
+[node name="rootsprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+
+[node name="sprites" type="AnimatedSprite2D" parent="rootsprite"]
+position = Vector2(0, 15)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_uf5tr")
 animation = &"idleRD"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ioxgp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -3394,7 +3165,7 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_j4nxn")
+tree_root = ExtResource("18_ioxgp")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/attack1 = false
 parameters/conditions/attack2 = false

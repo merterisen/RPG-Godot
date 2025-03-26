@@ -1,7 +1,7 @@
 #class_name Player extends CharacterBody2D
 extends CharacterBody2D
 
-@onready var sprites: AnimatedSprite2D = $sprites
+@onready var sprites: AnimatedSprite2D = $rootsprite/sprites
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var state_machine: StateMachine = $StateMachine
 
