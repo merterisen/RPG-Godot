@@ -16,8 +16,8 @@ class_name AttackState extends State
 
 #------------------------------------------------------------------------------#
 func enter_state(): #When attack1 starts
-	animation_tree["parameters/conditions/attack1"] = true
-	animate_attack()
+	animation_tree["parameters/conditions/attack1"] = true # Activate the attack1 animation in the animation tree
+	animate_attack() # Trigger the attack animation
 	attack()
 	attack_1_timer.start() #Start attack1 timer
 
@@ -26,22 +26,21 @@ func update_state(_delta: float):
 	run() #Move always
 	
 	if Input.is_action_just_pressed("attack"): # Combo Input
-		attack_in_queue = true
+		attack_in_queue = true # Queue the next attack for a combo
 
 #------------------------------------------------------------------------------#
 
 func attack(): #Decides Attack's direction and forces enemy_statemachine to takedamage state.
 	
+	# Select the hitbox based on the player's last direction
 	var hitbox: Area2D = hitboxright if player.last_direction.x > 0 else hitboxleft
 	
-	for area in hitbox.get_overlapping_areas():
-		if area.is_in_group("enemy_hurtbox"):
-			var enemy = area.get_parent()
-			var enemy_statemachine = enemy.get_node("StateMachine")
-			if enemy_statemachine:
-				enemy_statemachine.force_change_state("takedamage")
-
-
+	for area in hitbox.get_overlapping_areas(): # Check all overlapping areas in the hitbox
+		if area.is_in_group("enemy_hurtbox"): # If the area belongs to an enemy hurtbox group
+			var enemy = area.get_parent() # Get the enemy node
+			var enemy_statemachine = enemy.get_node("StateMachine") # Access the enemy's state machine
+			if enemy_statemachine: # If the enemy has a state machine
+				enemy_statemachine.force_change_state("takedamage") #force it to change to takedamage state
 
 func animate_attack():
 	animation_tree["parameters/attack1/blend_position"] = player.last_direction

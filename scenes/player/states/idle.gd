@@ -18,10 +18,8 @@ func update_state(_delta: float):
 		state_transition.emit(self, "attack")
 		
 	if player.direction != Vector2.ZERO: #Transition to run state
-		# and not Input.is_action_just_pressed("attack"):
 		animation_tree["parameters/conditions/idle"] = false
 		state_transition.emit(self, "run")
-	
 
 #------------------------------------------------------------------------------#
 

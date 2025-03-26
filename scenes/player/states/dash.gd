@@ -34,7 +34,9 @@ func dash():
 	player.move_and_slide()
 	
 func animate_dash():
+	# If there is no x axis dash direction, use the player's last x direction
 	if dash_direction.x == 0:
 		animation_tree["parameters/dash/blend_position"] = Vector2(player.last_direction.x, dash_direction.y)
+	# Otherwise, use the current dash direction
 	else:
 		animation_tree["parameters/dash/blend_position"] = dash_direction
