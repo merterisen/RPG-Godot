@@ -1,4 +1,4 @@
-class_name AttackState extends State
+class_name PlayerAttackState extends State
 
 @onready var player: CharacterBody2D = $"../.."
 @onready var sprites: AnimatedSprite2D = $"../../rootsprite/sprites"
@@ -12,7 +12,10 @@ class_name AttackState extends State
 @onready var attack_1_timer: Timer = $Attack1Timer
 @onready var attack_2_timer: Timer = $Attack2Timer
 @onready var attack_3_timer: Timer = $Attack3Timer
-@onready var attack_in_queue := false
+@onready var attack_in_queue: bool = false
+
+#NOTE 1 Attack animasyonunda 10 Frame var Hızı da 40 Frame
+# Yani 10/40 Animasyon 0.25 saniye sürüyor. Timerler de 0.25 e göre ayarlandı.
 
 #------------------------------------------------------------------------------#
 func enter_state(): #When attack1 starts
@@ -30,7 +33,7 @@ func update_state(_delta: float):
 
 #------------------------------------------------------------------------------#
 
-func attack(): #Decides Attack's direction and forces enemy_statemachine to takedamage state.
+func attack() -> void: #Decides Attack's direction and forces enemy_statemachine to takedamage state.
 	
 	# Select the hitbox based on the player's last direction
 	var hitbox: Area2D = hitboxright if player.last_direction.x > 0 else hitboxleft
@@ -42,12 +45,12 @@ func attack(): #Decides Attack's direction and forces enemy_statemachine to take
 			if enemy_statemachine: # If the enemy has a state machine
 				enemy_statemachine.force_change_state("takedamage") #force it to change to takedamage state
 
-func animate_attack():
+func animate_attack() -> void:
 	animation_tree["parameters/attack1/blend_position"] = player.last_direction
 	animation_tree["parameters/attack2/blend_position"] = player.last_direction
 	animation_tree["parameters/attack3/blend_position"] = player.last_direction
 
-func run():
+func run() -> void:
 	player.velocity = player.direction * player.speed * player.attack_multiplier
 	player.move_and_slide()
 

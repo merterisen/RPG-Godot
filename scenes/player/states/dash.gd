@@ -1,4 +1,4 @@
-class_name DashState extends State
+class_name PlayerDashState extends State
 
 @onready var player: CharacterBody2D = $"../.."
 @onready var sprites: AnimatedSprite2D = $"../../rootsprite/sprites"
@@ -29,11 +29,11 @@ func _on_dash_timer_timeout() -> void: #When Dash Timer Ends
 	state_transition.emit(self, "run") #Transition to run state
 
 
-func dash():
+func dash() -> void:
 	player.velocity = dash_direction * player.speed * player.dash_multiplier
 	player.move_and_slide()
 	
-func animate_dash():
+func animate_dash() -> void:
 	# If there is no x axis dash direction, use the player's last x direction
 	if dash_direction.x == 0:
 		animation_tree["parameters/dash/blend_position"] = Vector2(player.last_direction.x, dash_direction.y)

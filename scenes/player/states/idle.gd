@@ -1,4 +1,4 @@
-class_name IdleState extends State
+class_name PlayerIdleState extends State
 
 @onready var player: CharacterBody2D = $"../.."
 @onready var sprites: AnimatedSprite2D = $"../../rootsprite/sprites"
@@ -23,5 +23,5 @@ func update_state(_delta: float):
 
 #------------------------------------------------------------------------------#
 
-func animate_idle():
+func animate_idle() -> void:
 	animation_tree["parameters/idle/blend_position"] = player.last_direction

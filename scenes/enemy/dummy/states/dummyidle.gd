@@ -7,7 +7,6 @@ class_name DummyIdleState extends State
 func enter_state():
 	rootsprite.modulate = Color(1, 1, 1, 1)
 
-
-func update_state(_delta: float):
+func Exit():
 	pass
 #------------------------------------------------------------------------------#

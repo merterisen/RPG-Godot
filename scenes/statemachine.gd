@@ -49,14 +49,14 @@ func force_change_state(new_state : String):
 		print(new_state + " does not exist in the dictionary of states")
 		return
 	
-	if current_state == newState:
-		print("State is same, aborting")
-		return
+	#if current_state == newState:
+	#	print("State is same, aborting")
+	#	return
 		
-	#NOTE Calling exit like so: (current_state.Exit()) may cause warnings when flushing queries, like when the enemy is being removed after death. 
-	#call_deferred is safe and prevents this from occuring. We get the Exit function from the state as a callable and then call it in a thread-safe manner
+	#NOTE Calling exit like so: (current_state.exit_state()) may cause warnings when flushing queries, like when the enemy is being removed after death. 
+	#call_deferred is safe and prevents this from occuring. We get the exit_state function from the state as a callable and then call it in a thread-safe manner
 	if current_state:
-		var exit_callable = Callable(current_state, "Exit")
+		var exit_callable = Callable(current_state, "exit_state")
 		exit_callable.call_deferred()
 	
 	newState.enter_state()

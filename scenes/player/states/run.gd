@@ -1,4 +1,4 @@
-class_name RunState extends State
+class_name PlayerRunState extends State
 
 @onready var player: CharacterBody2D = $"../.."
 @onready var sprites: AnimatedSprite2D = $"../../rootsprite/sprites"
@@ -32,9 +32,9 @@ func update_state(_delta: float):
 		
 #------------------------------------------------------------------------------#
 
-func animate_run():
+func animate_run() -> void:
 	animation_tree["parameters/run/blend_position"] = player.last_direction
 
-func run():
+func run() -> void:
 	player.velocity = player.direction * player.speed
 	player.move_and_slide()
