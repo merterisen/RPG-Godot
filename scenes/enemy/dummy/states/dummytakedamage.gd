@@ -3,22 +3,34 @@ class_name DummyTakeDamageState extends State
 @onready var rootsprite: Sprite2D = $"../../rootsprite"
 @onready var sprite: Sprite2D = $"../../rootsprite/sprite"
 @onready var hitflash: Sprite2D = $"../../rootsprite/hitflash"
+@onready var healthbar: ProgressBar = $"../../healthbar"
 
 @onready var takedamagetimer: Timer = $takedamagetimer
 @onready var hitflashtimer: Timer = $hitflashtimer
 
+var pending_damage: float = 0.0
+
 #------------------------------------------------------------------------------#
 func enter_state():
-	hitflashtimer.start()
-	takedamagetimer.start()
+	pass
 
 func update_state(_delta: float):
 	pass
 #------------------------------------------------------------------------------#
 
-func _on_hitflashtimer_timeout() -> void:
-	hit_flash()
+# Player triggers this function
+func take_damage_settings(player_animation_duration: float, player_attack_damage: float) -> void:
+	hitflashtimer.wait_time = player_animation_duration * (0.2/0.25)
+	hitflashtimer.start()
+	
+	takedamagetimer.wait_time = player_animation_duration 
+	takedamagetimer.start()
+	
+	pending_damage = player_attack_damage
 
+func _on_hitflashtimer_timeout() -> void:
+	healthbar.value -= pending_damage
+	hit_flash()
 
 func _on_takedamagetimer_timeout() -> void:
 	state_transition.emit(self, "idle")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3jo8t3e2uldk"]
+[gd_scene load_steps=12 format=3 uid="uid://b3jo8t3e2uldk"]
 
 [ext_resource type="Script" uid="uid://cfa54j41xcpna" path="res://scenes/enemy/dummy/dummy.gd" id="1_v1s2w"]
 [ext_resource type="Shader" uid="uid://6rotle1rvgpo" path="res://scenes/hit_flash.tres" id="2_bgyhj"]
@@ -6,6 +6,12 @@
 [ext_resource type="Script" uid="uid://b7p5u4dve3sx" path="res://scenes/statemachine.gd" id="3_bgyhj"]
 [ext_resource type="Script" uid="uid://dw016lb68c3st" path="res://scenes/enemy/dummy/states/dummyidle.gd" id="4_sjcwc"]
 [ext_resource type="Script" uid="uid://2gb11nguxxp3" path="res://scenes/enemy/dummy/states/dummytakedamage.gd" id="5_hp4hj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_no016"]
+bg_color = Color(0.223103, 0.223103, 0.223103, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgyhj"]
+bg_color = Color(1, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_no016"]
 shader = ExtResource("2_bgyhj")
@@ -19,6 +25,17 @@ size = Vector2(22, 35)
 
 [node name="dummy" type="CharacterBody2D"]
 script = ExtResource("1_v1s2w")
+
+[node name="healthbar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -9.0
+offset_top = -33.0
+offset_right = 9.0
+offset_bottom = -29.0
+theme_override_styles/background = SubResource("StyleBoxFlat_no016")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bgyhj")
+value = 100.0
+show_percentage = false
 
 [node name="rootsprite" type="Sprite2D" parent="."]
 
@@ -65,5 +82,6 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
+[connection signal="value_changed" from="healthbar" to="." method="_on_healthbar_value_changed"]
 [connection signal="timeout" from="StateMachine/takedamage/takedamagetimer" to="StateMachine/takedamage" method="_on_takedamagetimer_timeout"]
 [connection signal="timeout" from="StateMachine/takedamage/hitflashtimer" to="StateMachine/takedamage" method="_on_hitflashtimer_timeout"]

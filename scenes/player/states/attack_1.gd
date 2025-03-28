@@ -14,6 +14,7 @@ class_name PlayerAttackState extends State
 @onready var attack_3_timer: Timer = $Attack3Timer
 @onready var attack_in_queue: bool = false
 
+var animation_duration: float = 0.25
 #NOTE 1 Attack animasyonunda 10 Frame var Hızı da 40 Frame
 # Yani 10/40 Animasyon 0.25 saniye sürüyor. Timerler de 0.25 e göre ayarlandı.
 
@@ -22,6 +23,11 @@ func enter_state(): #When attack1 starts
 	animation_tree["parameters/conditions/attack1"] = true # Activate the attack1 animation in the animation tree
 	animate_attack() # Trigger the attack animation
 	attack()
+	
+	attack_1_timer.wait_time = animation_duration
+	attack_2_timer.wait_time = animation_duration
+	attack_3_timer.wait_time = animation_duration
+	
 	attack_1_timer.start() #Start attack1 timer
 
 
@@ -33,17 +39,21 @@ func update_state(_delta: float):
 
 #------------------------------------------------------------------------------#
 
-func attack() -> void: #Decides Attack's direction and forces enemy_statemachine to takedamage state.
-	
+func attack() -> void: #Decides Attack's direction and controls enemy's state and functions.
 	# Select the hitbox based on the player's last direction
 	var hitbox: Area2D = hitboxright if player.last_direction.x > 0 else hitboxleft
 	
 	for area in hitbox.get_overlapping_areas(): # Check all overlapping areas in the hitbox
 		if area.is_in_group("enemy_hurtbox"): # If the area belongs to an enemy hurtbox group
+		# If area has enemy_hurtbox, there must be statemachine and takedamage state.
 			var enemy = area.get_parent() # Get the enemy node
+			
 			var enemy_statemachine = enemy.get_node("StateMachine") # Access the enemy's state machine
-			if enemy_statemachine: # If the enemy has a state machine
-				enemy_statemachine.force_change_state("takedamage") #force it to change to takedamage state
+			enemy_statemachine.force_change_state("takedamage") #force it to change to takedamage state
+			
+			var enemy_takedamage = enemy_statemachine.get_node("takedamage")
+			enemy_takedamage.take_damage_settings(animation_duration, player.attack_damage)
+
 
 func animate_attack() -> void:
 	animation_tree["parameters/attack1/blend_position"] = player.last_direction
