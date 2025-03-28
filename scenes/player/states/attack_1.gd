@@ -51,8 +51,14 @@ func attack() -> void: #Decides Attack's direction and controls enemy's state an
 			var enemy_statemachine = enemy.get_node("StateMachine") # Access the enemy's state machine
 			enemy_statemachine.force_change_state("takedamage") #force it to change to takedamage state
 			
+			var knockback_direction = player.last_direction
+			
 			var enemy_takedamage = enemy_statemachine.get_node("takedamage")
-			enemy_takedamage.take_damage_settings(animation_duration, player.attack_damage)
+			enemy_takedamage.take_damage_settings(
+				animation_duration, 
+				player.attack_damage,
+				player.last_direction,
+				player.knockback_strength)
 
 
 func animate_attack() -> void:

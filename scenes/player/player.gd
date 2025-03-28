@@ -8,7 +8,8 @@ extends CharacterBody2D
 @export var speed := 150
 @export var dash_multiplier := 2.5
 @export var attack_multiplier := 0.3
-@export var attack_damage := 10.0
+@export var attack_damage: float = 10.0
+@export var knockback_strength: float = 100.0
 
 var direction: Vector2 = Vector2.ZERO #For move direction
 var last_direction: Vector2 = Vector2(1, 1) #Mostly for animation's direction
@@ -20,11 +21,13 @@ func _physics_process(_delta: float) -> void:
 	handle_last_direction()
 
 
+
 func handle_direction():
 	direction = Vector2(
 		Input.get_axis("ui_left", "ui_right"), 
 		Input.get_axis("ui_up", "ui_down")
 	).normalized()
+
 
 func handle_last_direction():
 	# Assign last direction
