@@ -6,9 +6,12 @@ class_name DummyIdleState extends State
 
 #------------------------------------------------------------------------------#
 func enter_state():
-	dummy.velocity = Vector2.ZERO
-	rootsprite.modulate = Color(1, 1, 1, 1)
+	enter_state_settings()
 
-func Exit():
+func exit_state():
 	pass
 #------------------------------------------------------------------------------#
+
+func enter_state_settings():
+	dummy.velocity = Vector2.ZERO
+	rootsprite.modulate = Color(1, 1, 1, 1)

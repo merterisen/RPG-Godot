@@ -36,14 +36,6 @@ func take_damage_settings(player_animation_duration: float, player_attack_damage
 	knockback_direction = knockback_dir
 	knockback_speed = knockback_spd
 
-func _on_hitflashtimer_timeout() -> void:
-	healthbar.value -= pending_damage
-	hit_flash()
-	knockback()
-
-func _on_takedamagetimer_timeout() -> void:
-	state_transition.emit(self, "idle")
-
 func knockback() -> void:
 	dummy.velocity = knockback_direction * knockback_speed
 	dummy.move_and_slide()
@@ -60,3 +52,12 @@ func hit_flash() -> void:
 	hitflash.visible = false
 	sprite.visible = true
 	rootsprite.modulate = Color.RED # Make the sprite Red
+
+
+func _on_hitflashtimer_timeout() -> void:
+	healthbar.value -= pending_damage
+	hit_flash()
+	knockback()
+
+func _on_takedamagetimer_timeout() -> void:
+	state_transition.emit(self, "idle")

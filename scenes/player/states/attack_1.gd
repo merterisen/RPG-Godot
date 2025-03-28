@@ -20,24 +20,22 @@ var animation_duration: float = 0.25
 
 #------------------------------------------------------------------------------#
 func enter_state(): #When attack1 starts
-	animation_tree["parameters/conditions/attack1"] = true # Activate the attack1 animation in the animation tree
+	enter_state_settings()
 	animate_attack() # Trigger the attack animation
 	attack()
-	
-	attack_1_timer.wait_time = animation_duration
-	attack_2_timer.wait_time = animation_duration
-	attack_3_timer.wait_time = animation_duration
-	
-	attack_1_timer.start() #Start attack1 timer
-
 
 func update_state(_delta: float):
 	run() #Move always
-	
-	if Input.is_action_just_pressed("attack"): # Combo Input
-		attack_in_queue = true # Queue the next attack for a combo
-
+	check_combo()
 #------------------------------------------------------------------------------#
+
+
+func enter_state_settings() -> void:
+	animation_tree["parameters/conditions/attack1"] = true # Activate the attack1 animation in the animation tree
+	attack_1_timer.wait_time = animation_duration
+	attack_2_timer.wait_time = animation_duration
+	attack_3_timer.wait_time = animation_duration
+	attack_1_timer.start() #Start attack1 timer
 
 func attack() -> void: #Decides Attack's direction and controls enemy's state and functions.
 	# Select the hitbox based on the player's last direction
@@ -60,7 +58,6 @@ func attack() -> void: #Decides Attack's direction and controls enemy's state an
 				player.last_direction,
 				player.knockback_strength)
 
-
 func animate_attack() -> void:
 	animation_tree["parameters/attack1/blend_position"] = player.last_direction
 	animation_tree["parameters/attack2/blend_position"] = player.last_direction
@@ -69,6 +66,11 @@ func animate_attack() -> void:
 func run() -> void:
 	player.velocity = player.direction * player.speed * player.attack_multiplier
 	player.move_and_slide()
+
+func check_combo() -> void:
+	if Input.is_action_just_pressed("attack"): # Combo Input
+		attack_in_queue = true # Queue the next attack for a combo
+
 
 
 func _on_attack_1_timer_timeout() -> void: #When attack 1 timer ends
