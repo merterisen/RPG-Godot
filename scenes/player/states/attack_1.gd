@@ -1,5 +1,6 @@
 class_name PlayerAttackState extends State
 
+@onready var camera: Camera2D = $"../../camera"
 @onready var player: CharacterBody2D = $"../.."
 @onready var sprites: AnimatedSprite2D = $"../../rootsprite/sprites"
 @onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
@@ -18,15 +19,21 @@ var animation_duration: float = 0.25
 #NOTE 1 Attack animasyonunda 10 Frame var Hızı da 40 Frame
 # Yani 10/40 Animasyon 0.25 saniye sürüyor. Timerler de 0.25 e göre ayarlandı.
 
+var camera_shake_strength: float = 0.0
+var camera_shake_fade: float = 5.0
+var camera_offset_rng = RandomNumberGenerator.new()
+
 #------------------------------------------------------------------------------#
 func enter_state(): #When attack1 starts
 	enter_state_settings()
 	animate_attack() # Trigger the attack animation
 	attack()
 
-func update_state(_delta: float):
+func update_state(delta: float):
 	run() #Move always
 	check_combo()
+	move_camera_to_offset_zero(delta)
+
 #------------------------------------------------------------------------------#
 
 
@@ -57,6 +64,8 @@ func attack() -> void: #Decides Attack's direction and controls enemy's state an
 				player.attack_damage,
 				player.last_direction,
 				player.knockback_strength)
+			
+			shake_camera()
 
 func animate_attack() -> void:
 	animation_tree["parameters/attack1/blend_position"] = player.last_direction
@@ -71,7 +80,18 @@ func check_combo() -> void:
 	if Input.is_action_just_pressed("attack"): # Combo Input
 		attack_in_queue = true # Queue the next attack for a combo
 
+func shake_camera(strength: float = 1.5) -> void:
+	camera_shake_strength = strength
 
+func move_camera_to_offset_zero(delta) -> void:
+	if camera_shake_strength > 0:
+		camera.offset = Vector2(
+			camera_offset_rng.randf_range(-camera_shake_strength, camera_shake_strength),
+			camera_offset_rng.randf_range(-camera_shake_strength, camera_shake_strength),
+		)
+		camera_shake_strength = lerpf(camera_shake_strength, 0, camera_shake_fade * delta)
+	else:
+		camera.offset = Vector2.ZERO
 
 func _on_attack_1_timer_timeout() -> void: #When attack 1 timer ends
 	animation_tree["parameters/conditions/attack1"] = false

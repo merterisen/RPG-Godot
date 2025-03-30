@@ -46,7 +46,7 @@ func hit_flash() -> void:
 	
 	#Freeze the Game for a 0.1 sec
 	Engine.time_scale = 0.00
-	await get_tree().create_timer(0.1, true, false, true).timeout
+	await get_tree().create_timer(0.05, true, false, true).timeout
 	Engine.time_scale = 1.0
 	
 	hitflash.visible = false

@@ -9,8 +9,5 @@ y_sort_enabled = true
 [node name="character" parent="." instance=ExtResource("1_nnsk1")]
 position = Vector2(128, 192)
 
-[node name="Camera2D" type="Camera2D" parent="character"]
-position_smoothing_enabled = true
-
 [node name="targetdummy" parent="." instance=ExtResource("2_rwgxs")]
 position = Vector2(300, 192)

@@ -3150,9 +3150,6 @@ motion_mode = 1
 script = ExtResource("1_p47bc")
 dash_multiplier = 2.0
 
-[node name="camera" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-
 [node name="rootsprite" type="Sprite2D" parent="."]
 
 [node name="sprites" type="AnimatedSprite2D" parent="rootsprite"]
@@ -3236,6 +3233,8 @@ one_shot = true
 [node name="Attack3Timer" type="Timer" parent="StateMachine/attack"]
 wait_time = 0.25
 one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="timeout" from="StateMachine/dash/DashTimer" to="StateMachine/dash" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="StateMachine/attack/Attack1Timer" to="StateMachine/attack" method="_on_attack_1_timer_timeout"]
