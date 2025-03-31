@@ -13,11 +13,15 @@ class_name PlayerAttackState extends State
 @onready var attack_1_timer: Timer = $Attack1Timer
 @onready var attack_2_timer: Timer = $Attack2Timer
 @onready var attack_3_timer: Timer = $Attack3Timer
+@onready var attack_4_timer: Timer = $Attack4Timer
+@onready var attack_5_timer: Timer = $Attack5Timer
+
 @onready var attack_in_queue: bool = false
 
 var animation_duration: float = 0.25
-#NOTE 1 Attack animasyonunda 10 Frame var Hızı da 40 Frame
+#NOTE 1 Attack animasyonlarında 10 Frame var Hızı da 40 Frame
 # Yani 10/40 Animasyon 0.25 saniye sürüyor. Timerler de 0.25 e göre ayarlandı.
+# Attack5 aniamsyonunun hızı 2 katı
 
 var camera_shake_strength: float = 0.0
 var camera_shake_fade: float = 5.0
@@ -40,8 +44,15 @@ func update_state(delta: float):
 func enter_state_settings() -> void:
 	animation_tree["parameters/conditions/attack1"] = true # Activate the attack1 animation in the animation tree
 	attack_1_timer.wait_time = animation_duration
+	attack_1_timer.one_shot = true
 	attack_2_timer.wait_time = animation_duration
+	attack_2_timer.one_shot = true
 	attack_3_timer.wait_time = animation_duration
+	attack_3_timer.one_shot = true
+	attack_4_timer.wait_time = animation_duration
+	attack_4_timer.one_shot = true
+	attack_5_timer.wait_time = animation_duration * 2
+	attack_5_timer.one_shot = true
 	attack_1_timer.start() #Start attack1 timer
 
 func attack() -> void: #Decides Attack's direction and controls enemy's state and functions.
@@ -71,6 +82,8 @@ func animate_attack() -> void:
 	animation_tree["parameters/attack1/blend_position"] = player.last_direction
 	animation_tree["parameters/attack2/blend_position"] = player.last_direction
 	animation_tree["parameters/attack3/blend_position"] = player.last_direction
+	animation_tree["parameters/attack4/blend_position"] = player.last_direction
+	animation_tree["parameters/attack5/blend_position"] = player.last_direction
 
 func run() -> void:
 	player.velocity = player.direction * player.speed * player.attack_multiplier
@@ -92,6 +105,9 @@ func move_camera_to_offset_zero(delta) -> void:
 		camera_shake_strength = lerpf(camera_shake_strength, 0, camera_shake_fade * delta)
 	else:
 		camera.offset = Vector2.ZERO
+
+# Invalid change_state trying from: attack but currently in: idle hatası alırsan
+# Bu genelde Timerleri oneshot yapmadığın için.
 
 func _on_attack_1_timer_timeout() -> void: #When attack 1 timer ends
 	animation_tree["parameters/conditions/attack1"] = false
@@ -129,6 +145,40 @@ func _on_attack_2_timer_timeout() -> void: #When attack 2 timer ends
 
 func _on_attack_3_timer_timeout() -> void: #When attack 3 timer ends
 	animation_tree["parameters/conditions/attack3"] = false
+	
+	if attack_in_queue == false:
+		if player.direction == Vector2.ZERO:
+			state_transition.emit(self, "idle") #Transition to Idle state
+		
+		elif player.direction != Vector2.ZERO:
+			state_transition.emit(self, "run") #Transition to Run state
+	
+	elif attack_in_queue == true:
+		animation_tree["parameters/conditions/attack4"] = true
+		attack_in_queue = false
+		animate_attack() 
+		attack()
+		attack_4_timer.start()
+
+func _on_attack_4_timer_timeout() -> void:
+	animation_tree["parameters/conditions/attack4"] = false
+	
+	if attack_in_queue == false:
+		if player.direction == Vector2.ZERO:
+			state_transition.emit(self, "idle") #Transition to Idle state
+		
+		elif player.direction != Vector2.ZERO:
+			state_transition.emit(self, "run") #Transition to Run state
+	
+	elif attack_in_queue == true:
+		animation_tree["parameters/conditions/attack5"] = true
+		attack_in_queue = false
+		animate_attack() 
+		attack()
+		attack_5_timer.start()
+
+func _on_attack_5_timer_timeout() -> void:
+	animation_tree["parameters/conditions/attack5"] = false
 	
 	if attack_in_queue == false:
 		if player.direction == Vector2.ZERO:
